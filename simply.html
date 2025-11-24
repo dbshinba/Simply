@@ -1,0 +1,2752 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMPLY - Premium Works</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --secondary: #8b5cf6;
+            --accent: #f59e0b;
+            --background: #ffffff;
+            --surface: #ffffff;
+            --text: #000000;
+            --text-light: #404040;
+            --border: #e5e7eb;
+            --success: #10b981;
+            --error: #ef4444;
+            --glass: rgba(255, 255, 255, 0.95);
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
+            --elegant-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        body {
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 0;
+            padding-bottom: 80px;
+            font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        body.ai-chat-active {
+            overflow: hidden;
+        }
+        
+        /* Enhanced Navigation */
+        .navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--glass);
+            backdrop-filter: blur(40px);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            min-width: 55px;
+            position: relative;
+            user-select: none;
+        }
+        
+        .nav-item.active {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(139, 92, 246, 0.1));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+        }
+        
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 6px;
+            stroke: var(--text-light);
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: all 0.4s ease;
+        }
+        
+        .nav-item.active .nav-icon {
+            stroke: var(--primary);
+            transform: scale(1.2);
+            filter: drop-shadow(0 2px 8px rgba(16, 185, 129, 0.3));
+        }
+        
+        .nav-label {
+            font-size: 0.75em;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item.active .nav-label {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        /* Enhanced Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 30px 20px 20px 20px;
+            border-radius: 0 0 35px 35px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+        
+        .logo-container {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.8em;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 5px;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.9) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9em;
+            font-weight: 400;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 0 15px 20px 15px;
+            min-height: calc(100vh - 200px);
+        }
+        
+        /* Enhanced Sections */
+        .section {
+            display: none;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title {
+            font-size: 1.7em;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 35px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+        }
+        
+        /* Enhanced Home Section */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+        }
+        
+        .hero-title {
+            font-size: 2.3em;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-subtitle {
+            color: var(--text-light);
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        
+        .live-stats {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 25px 0;
+            padding: 18px;
+            background: var(--surface);
+            border-radius: 20px;
+            box-shadow: var(--elegant-shadow);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .online-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95em;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .online-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px var(--success);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+        
+        /* Withdrawal Animation Section */
+        .withdrawal-feed {
+            background: var(--surface);
+            border-radius: 20px;
+            margin: 25px 0;
+            box-shadow: var(--elegant-shadow);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            overflow: hidden;
+            position: relative;
+            height: 60px;
+        }
+        
+        .withdrawal-scroll {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            animation: scrollWithdrawals 20s linear infinite;
+        }
+        
+        @keyframes scrollWithdrawals {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
+        
+        .withdrawal-item {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+        }
+        
+        .withdrawal-item:last-child {
+            border-bottom: none;
+        }
+        
+        .withdrawal-name {
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .withdrawal-amount {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        /* Enhanced Notice Board */
+        .notice-board {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 25px 0;
+            box-shadow: var(--elegant-shadow);
+            border: 2px solid #ffd43b;
+            border-left: 6px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .notice-board::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--accent), #ff6b6b);
+        }
+        
+        .notice-title {
+            font-size: 1.3em;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #d35400;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .notice-title svg {
+            stroke: #d35400;
+        }
+        
+        /* Enhanced Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin: 35px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, var(--surface), #f8fafc);
+            padding: 25px 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--elegant-shadow);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-variant-numeric: tabular-nums;
+            text-shadow: 0 2px 10px rgba(16, 185, 129, 0.2);
+        }
+        
+        .stat-label {
+            font-size: 0.88em;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        
+        /* Enhanced Charts and Graphs */
+        .charts-container {
+            background: var(--surface);
+            padding: 30px 25px;
+            border-radius: 25px;
+            margin: 35px 0;
+            box-shadow: var(--elegant-shadow);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+        
+        .pie-chart-container {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 25px;
+            position: relative;
+        }
+        
+        .pie-chart {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--primary) 0% 65%,
+                var(--text-light) 65% 100%
+            );
+            position: relative;
+            animation: rotatePie 3s ease-in-out infinite;
+        }
+        
+        @keyframes rotatePie {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(5deg); }
+        }
+        
+        .pie-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 60%;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .comparison-chart {
+            margin-top: 30px;
+        }
+        
+        .chart-bar {
+            height: 35px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 18px;
+            margin: 18px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Enhanced Package Slider */
+        .packages-slider {
+            position: relative;
+            margin: 45px 0;
+            overflow: hidden;
+            border-radius: 25px;
+        }
+        
+        .slider-container {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            gap: 0;
+        }
+        
+        .package-card {
+            min-width: 100%;
+            background: var(--surface);
+            padding: 35px 30px;
+            border-radius: 25px;
+            box-shadow: var(--elegant-shadow);
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .package-card.pro {
+            background: linear-gradient(135deg, #ffffff, #f0f9ff, #e0f2fe);
+            border-color: #3b82f6;
+        }
+        
+        .package-card.premium {
+            background: linear-gradient(135deg, #ffffff, #fffbeb, #fef3c7);
+            border-color: var(--accent);
+        }
+        
+        .package-badge {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--accent), #f59e0b);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 800;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        }
+        
+        .package-card.pro .package-badge {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        }
+        
+        .package-price {
+            font-size: 2.8em;
+            font-weight: 800;
+            color: var(--text);
+            margin: 20px 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .package-features {
+            list-style: none;
+            margin: 25px 0;
+        }
+        
+        .package-features li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .package-features li:hover {
+            transform: translateX(5px);
+            color: var(--primary);
+        }
+        
+        .package-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            flex: 1;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.6);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 13px 20px;
+            border-radius: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            flex: 1;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+        
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 25px;
+        }
+        
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: var(--border);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .dot.active {
+            background: var(--primary);
+            transform: scale(1.3);
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+        }
+        
+        /* Enhanced Footer */
+        .footer {
+            margin-top: 60px;
+            padding: 40px 0 20px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        
+        .footer-column h4 {
+            font-size: 1.1em;
+            margin-bottom: 18px;
+            color: var(--text);
+            font-weight: 700;
+        }
+        
+        .footer-column a {
+            display: block;
+            color: var(--text-light);
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 0.92em;
+            transition: all 0.3s ease;
+            padding: 5px 0;
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        /* Enhanced Gigs Section - GALLERY STYLE */
+        .gigs-section {
+            position: relative;
+        }
+        
+        .gigs-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .jobs-count {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+        
+        .gigs-gallery {
+            position: relative;
+            margin: 0 auto 30px auto;
+            overflow: hidden;
+            border-radius: 25px;
+            background: var(--surface);
+            box-shadow: var(--elegant-shadow);
+        }
+        
+        .gallery-container {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .gallery-slide {
+            min-width: 100%;
+            padding: 30px 25px;
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7, #bbf7d0);
+            border-radius: 25px;
+        }
+        
+        .gallery-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding: 0 10px;
+        }
+        
+        .nav-arrow {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+        
+        .nav-arrow:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+        }
+        
+        .nav-arrow:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .slide-counter {
+            font-weight: 700;
+            color: var(--text);
+            font-size: 0.95em;
+        }
+        
+        .gallery-job-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--elegant-shadow);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-job-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .job-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .job-badge {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+        
+        .job-price {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: var(--primary);
+            text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+        }
+        
+        .job-title {
+            font-size: 1.5em;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--text);
+            line-height: 1.3;
+        }
+        
+        .job-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+        
+        .job-features {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8em;
+            color: var(--text-light);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 6px 12px;
+            border-radius: 10px;
+        }
+        
+        .feature svg {
+            width: 12px;
+            height: 12px;
+            stroke: var(--primary);
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--error);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+        }
+        
+        /* Enhanced Profile Section */
+        .profile-header {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--surface), #f8fafc);
+            border-radius: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--elegant-shadow);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5em;
+            font-weight: 700;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+            border: 4px solid white;
+            animation: pulse 3s infinite;
+        }
+        
+        .referral-link-container {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px dashed #3b82f6;
+            text-align: center;
+        }
+        
+        .referral-link {
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 0.9em;
+            margin: 10px 0;
+            border: 1px solid var(--border);
+            word-break: break-all;
+        }
+        
+        .salary-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .withdraw-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 18px 32px;
+            border-radius: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .withdraw-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .withdraw-btn:not(:disabled):hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.6);
+        }
+        
+        /* Enhanced AI Chat */
+        .ai-chat-container {
+            background: var(--surface);
+            border-radius: 0;
+            padding: 0;
+            margin: -20px -15px -80px;
+            border: none;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 2000;
+            box-shadow: none;
+        }
+        
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .chat-header h3 {
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: 700;
+            flex: 1;
+        }
+        
+        .back-button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #fafafa;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+            animation: messageSlide 0.3s ease;
+            line-height: 1.4;
+        }
+        
+        @keyframes messageSlide {
+            from { transform: translateY(10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .message.ai {
+            align-self: flex-start;
+            background: white;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e5e5;
+        }
+        
+        .message.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-bottom-right-radius: 5px;
+            box-shadow: 0 1px 2px rgba(16, 185, 129, 0.3);
+        }
+        
+        .message-time {
+            font-size: 0.7em;
+            opacity: 0.7;
+            margin-top: 5px;
+            text-align: right;
+        }
+        
+        .chat-input-container {
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #e5e5e5;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #e5e5e5;
+            border-radius: 25px;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+        }
+        
+        .send-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+        
+        /* Notifications Section */
+        .notifications-container {
+            background: var(--surface);
+            border-radius: 25px;
+            padding: 0;
+            box-shadow: var(--elegant-shadow);
+            overflow: hidden;
+        }
+        
+        .notification-item {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+        
+        .notification-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .notification-item.unread {
+            background: rgba(16, 185, 129, 0.05);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .notification-time {
+            font-size: 0.8em;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+        
+        /* Job Timer and Submission */
+        .timer-screen {
+            background: var(--surface);
+            padding: 30px 25px;
+            border-radius: 25px;
+            margin: 20px 0;
+            box-shadow: var(--elegant-shadow);
+            text-align: center;
+            position: relative;
+        }
+        
+        .timer {
+            font-size: 3.5em;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 25px 0;
+            font-variant-numeric: tabular-nums;
+            text-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+        }
+        
+        .submission-form {
+            background: var(--surface);
+            padding: 30px 25px;
+            border-radius: 25px;
+            margin: 20px 0;
+            box-shadow: var(--elegant-shadow);
+            position: relative;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+        
+        .upload-area {
+            border: 2px dashed var(--primary);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            background: rgba(16, 185, 129, 0.02);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-area:hover {
+            background: rgba(16, 185, 129, 0.05);
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: var(--error);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.75em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        .active-timer-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            z-index: 1500;
+            display: none;
+            animation: timerProgress 30s linear infinite;
+        }
+        
+        @keyframes timerProgress {
+            0% { width: 100%; }
+            100% { width: 0%; }
+        }
+        
+        /* Popup Modal */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        
+        .popup {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            max-width: 320px;
+            margin: 20px;
+            box-shadow: var(--elegant-shadow);
+        }
+
+        /* Salary Chart Styles */
+        .salary-chart {
+            background: var(--surface);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            box-shadow: var(--elegant-shadow);
+        }
+
+        .chart-days {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .day-bar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bar-container {
+            height: 120px;
+            width: 25px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar-fill-day {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            transition: height 1s ease;
+        }
+
+        .day-label {
+            font-size: 0.8em;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .day-amount {
+            font-size: 0.75em;
+            color: var(--primary);
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="active-timer-bar" id="activeTimerBar"></div>
+
+    <div class="header">
+        <div class="logo-container">
+            <div class="logo">SIMPLY</div>
+            <div class="tagline">আপনার দক্ষতা, আপনার আয়</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Home Section -->
+        <div class="section active" id="homeSection">
+            <div class="hero-section">
+                <h1 class="hero-title">আপনার দক্ষতাকে করুন অর্থে রূপান্তর</h1>
+                <p class="hero-subtitle">বিশ্বস্ত প্লাটফর্ম যেখানে প্রতিটি দক্ষতা মূল্যবান</p>
+                
+                <div class="live-stats">
+                    <div class="online-indicator">
+                        <div class="online-dot"></div>
+                        <span id="onlineUsers">১৮৯</span> জন অনলাইন
+                    </div>
+                </div>
+            </div>
+
+            <!-- Withdrawal Feed -->
+            <div class="withdrawal-feed">
+                <div class="withdrawal-scroll" id="withdrawalScroll">
+                    <!-- Withdrawal items will be dynamically added -->
+                </div>
+            </div>
+
+            <div class="notice-board" id="noticeBoard">
+                <div class="notice-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    বিশেষ ঘোষণা
+                </div>
+                <p>নতুন প্রিমিয়াম প্যাকেজ চালু! এখনই আপগ্রেড করুন এবং ৮০% বেশি আয় করুন।</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card" id="stat1">
+                    <div class="stat-value">৭০০+</div>
+                    <div class="stat-label">নতুন রেজিস্ট্রেশন (১৫ দিন)</div>
+                </div>
+                <div class="stat-card" id="stat2">
+                    <div class="stat-value">৩৩,৭৯০/-</div>
+                    <div class="stat-label">গত সপ্তাহে উত্তোলন</div>
+                </div>
+                <div class="stat-card" id="stat3">
+                    <div class="stat-value">১.১৫ কোটি/-</div>
+                    <div class="stat-label">মোট উত্তোলন</div>
+                </div>
+                <div class="stat-card" id="stat4">
+                    <div class="stat-value">২,৩৬৫+</div>
+                    <div class="stat-label">মোট সদস্য</div>
+                </div>
+            </div>
+
+            <div class="charts-container" id="chartsContainer">
+                <div class="pie-chart-container">
+                    <div class="pie-chart"></div>
+                    <div class="pie-center"></div>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: var(--primary);"></div>
+                        <span>প্রিমিয়াম (৬৫%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: var(--text-light);"></div>
+                        <span>ফ্রি (৩৫%)</span>
+                    </div>
+                </div>
+                
+                <div class="comparison-chart">
+                    <h4 style="margin-bottom: 20px; text-align: center; color: var(--text);">প্রিমিয়াম vs ফ্রি আয়ের তুলনা</h4>
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: between; margin-bottom: 8px;">
+                            <span style="font-weight: 600;">ফ্রি ব্যবহারকারী</span>
+                            <span style="font-weight: 700; color: var(--primary);">৫,২৫০/- সপ্তাহ</span>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar-fill" style="width: 45%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; justify-content: between; margin-bottom: 8px;">
+                            <span style="font-weight: 600;">প্রিমিয়াম ব্যবহারকারী</span>
+                            <span style="font-weight: 700; color: var(--primary);">৯,৪৫০/- সপ্তাহ</span>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar-fill" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="packages-slider">
+                <div class="slider-container" id="sliderContainer">
+                    <div class="package-card pro">
+                        <div class="package-badge">PRO</div>
+                        <h3 style="font-size: 1.4em; margin-bottom: 10px; color: var(--text);">প্রো প্যাকেজ</h3>
+                        <div class="package-price">৫৯৯/-</div>
+                        <ul class="package-features">
+                            <li>১২ ঘন্টায় ৬টি কাজ</li>
+                            <li>ফ্রি থেকে ৩০% বেশি আয়</li>
+                            <li>৩০/- রেফারেল বোনাস</li>
+                            <li>ব্লু ভেরিফাইড ব্যাজ</li>
+                            <li>প্রাথমিক সাপোর্ট</li>
+                        </ul>
+                        <div class="cta-buttons">
+                            <button class="btn-primary" onclick="showPopup('শীঘ্রই আসছে', 'প্রো প্যাকেজ শীঘ্রই চালু হবে!')">আপগ্রেড করুন</button>
+                            <button class="btn-secondary" onclick="showPopup('বিস্তারিত', 'প্রো প্যাকেজে ৩০% বেশি আয়ের সুযোগ সহ অনেক ফিচার!')">বিস্তারিত জানুন</button>
+                        </div>
+                    </div>
+                    
+                    <div class="package-card premium">
+                        <div class="package-badge">PREMIUM</div>
+                        <h3 style="font-size: 1.4em; margin-bottom: 10px; color: var(--text);">প্রিমিয়াম প্যাকেজ</h3>
+                        <div class="package-price">৯৯৯/-</div>
+                        <ul class="package-features">
+                            <li>ফ্রি থেকে ৮০% বেশি আয়</li>
+                            <li>অসীম কাজের সুযোগ</li>
+                            <li>৫০/- রেফারেল বোনাস</li>
+                            <li>গোল্ড ভেরিফাইড ব্যাজ</li>
+                            <li>তাত্ক্ষণিক উত্তোলন</li>
+                            <li>অগ্রাধিকার সাপোর্ট</li>
+                        </ul>
+                        <div class="cta-buttons">
+                            <button class="btn-primary" onclick="showPopup('শীঘ্রই আসছে', 'প্রিমিয়াম প্যাকেজ শীঘ্রই চালু হবে!')">আপগ্রেড করুন</button>
+                            <button class="btn-secondary" onclick="showPopup('বিস্তারিত', 'প্রিমিয়াম প্যাকেজে ৮০% বেশি আয়ের সুযোগ সহ সব ফিচার!')">বিস্তারিত জানুন</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-dots">
+                    <div class="dot active" onclick="slidePackageTo(0)"></div>
+                    <div class="dot" onclick="slidePackageTo(1)"></div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>প্লাটফর্ম</h4>
+                        <a href="#" onclick="showPopup('শীঘ্রই আসছে', 'এই ফিচারটি শীঘ্রই যোগ করা হবে!')">আমাদের সম্পর্কে</a>
+                        <a href="#" onclick="showPopup('শীঘ্রই আসছে', 'এই ফিচারটি শীঘ্রই যোগ করা হবে!')">ক্যারিয়ার</a>
+                        <a href="#" onclick="showPopup('শীঘ্রই আসছে', 'এই ফিচারটি শীঘ্রই যোগ করা হবে!')">সাফল্যের গল্প</a>
+                        <a href="#" onclick="showPopup('শীঘ্রই আসছে', 'এই ফিচারটি শীঘ্রই যোগ করা হবে!')">ব্লগ</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>সাপোর্ট</h4>
+                        <a href="#" onclick="openAIChat()">সাহায্য কেন্দ্র</a>
+                        <a href="#" onclick="showPopup('প্রাইভেসি পলিসি', 'আপনার ডেটা নিরাপদে সংরক্ষিত থাকে!')">প্রাইভেসি পলিসি</a>
+                        <a href="#" onclick="showPopup('শর্তাবলী', 'সার্ভিসের শর্তাবলী শীঘ্রই যোগ করা হবে!')">শর্তাবলী</a>
+                        <a href="#" onclick="showPopup('কুকি পলিসি', 'কুকি পলিসি শীঘ্রই যোগ করা হবে!')">কুকি পলিসি</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="section" id="profileSection">
+            <h2 class="section-title">প্রোফাইল</h2>
+            <div class="profile-header">
+                <div class="profile-pic" id="profilePic">U</div>
+                <h3 id="userName">ইউজার</h3>
+                <p id="userUsername">@username</p>
+                
+                <div class="referral-link-container">
+                    <h4 style="margin-bottom: 10px; color: var(--text);">আপনার রেফারেল লিংক</h4>
+                    <div class="referral-link" id="referralLink">https://t.me/simplybot?start=ref123456</div>
+                    <button class="btn-secondary" onclick="copyReferralLink()">লিংক কপি করুন</button>
+                </div>
+                
+                <div class="salary-stats">
+                    <div class="stat-card" style="transform: none; opacity: 1;">
+                        <div class="stat-value" id="totalJobs">০</div>
+                        <div class="stat-label">মোট কাজ</div>
+                    </div>
+                    <div class="stat-card" style="transform: none; opacity: 1;">
+                        <div class="stat-value" id="totalEarned">০/-</div>
+                        <div class="stat-label">মোট আয়</div>
+                    </div>
+                    <div class="stat-card" style="transform: none; opacity: 1;">
+                        <div class="stat-value" id="withdrawn">০/-</div>
+                        <div class="stat-label">উত্তোলন</div>
+                    </div>
+                    <div class="stat-card" style="transform: none; opacity: 1;">
+                        <div class="stat-value" id="referralEarned">১৫০/-</div>
+                        <div class="stat-label">রেফারেল আয়</div>
+                    </div>
+                </div>
+
+                <!-- Salary Chart -->
+                <div class="salary-chart">
+                    <h4 style="text-align: center; margin-bottom: 20px; color: var(--text);">সালারি চার্ট (গত ৭ দিন)</h4>
+                    <div class="chart-days" id="salaryChart">
+                        <!-- Dynamic chart will be inserted here -->
+                    </div>
+                </div>
+                
+                <button class="withdraw-btn" id="withdrawBtn" onclick="processWithdrawal()">উত্তোলন করুন</button>
+            </div>
+        </div>
+
+        <!-- Gigs Section - UPDATED GALLERY STYLE -->
+        <div class="section" id="gigsSection">
+            <div class="gigs-header">
+                <h2 class="section-title" style="margin: 0;">গিগস</h2>
+                <div class="jobs-count" id="jobsCount">১০ টি কাজ</div>
+            </div>
+            
+            <div class="gigs-gallery">
+                <div class="gallery-container" id="galleryContainer">
+                    <!-- Gallery slides will be dynamically added here -->
+                </div>
+            </div>
+            
+            <div class="gallery-navigation">
+                <button class="nav-arrow" id="prevBtn" onclick="prevSlide()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                
+                <div class="slide-counter" id="slideCounter">১/১০</div>
+                
+                <button class="nav-arrow" id="nextBtn" onclick="nextSlide()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Notifications Section -->
+        <div class="section" id="notificationsSection">
+            <h2 class="section-title">নোটিফিকেশন</h2>
+            <div class="notifications-container" id="notificationsList">
+                <!-- Notifications will be loaded here -->
+            </div>
+        </div>
+
+        <!-- AI Help Section -->
+        <div class="section" id="aiHelpSection">
+            <!-- This will be replaced with full-screen chat -->
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-item active" onclick="switchSection('home')">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <div class="nav-label">হোম</div>
+        </div>
+        
+        <div class="nav-item" onclick="switchSection('profile')">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <div class="nav-label">প্রোফাইল</div>
+        </div>
+        
+        <div class="nav-item" onclick="switchSection('gigs')">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"></path>
+            </svg>
+            <div class="nav-label">গিগস</div>
+        </div>
+        
+        <div class="nav-item" onclick="switchSection('notifications')">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <div class="nav-label">নোটিফিকেশন</div>
+            <div class="notification-badge" id="notificationBadge">1</div>
+        </div>
+        
+        <div class="nav-item" onclick="openAIChat()">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline>
+                <polyline points="7.5 19.79 7.5 14.6 3 12"></polyline>
+                <polyline points="21 12 16.5 14.6 16.5 19.79"></polyline>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+            <div class="nav-label">AI সাহায্য</div>
+        </div>
+    </nav>
+
+    <!-- Popup Modal -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup" id="popup">
+            <h3 id="popupTitle">অপেক্ষা করুন</h3>
+            <p id="popupMessage">আপনার সাবমিশন রিভিউ করা হচ্ছে</p>
+            <button class="btn-primary" onclick="closePopup()" style="margin-top: 20px;">ঠিক আছে</button>
+        </div>
+    </div>
+
+    <script>
+        // =============================================
+        // COMPLETE WORKING CODE - CANCEL BUTTONS FIXED
+        // =============================================
+
+        // FIXED CANCEL FUNCTION - WORKS 100%
+        function cancelAndReturn() {
+            // Stop timer if running
+            if (window.timerInterval) {
+                clearInterval(window.timerInterval);
+                window.timerInterval = null;
+            }
+            
+            // Hide timer bar
+            const timerBar = document.getElementById('activeTimerBar');
+            if (timerBar) timerBar.style.display = 'none';
+            
+            // SIMPLE FIX: Just reload the gigs section
+            const gigsSection = document.getElementById('gigsSection');
+            if (gigsSection) {
+                gigsSection.innerHTML = `
+                    <div class="gigs-header">
+                        <h2 class="section-title" style="margin: 0;">গিগস</h2>
+                        <div class="jobs-count" id="jobsCount">লোড হচ্ছে...</div>
+                    </div>
+                    
+                    <div class="gigs-gallery">
+                        <div class="gallery-container" id="galleryContainer">
+                            <!-- Gallery will load -->
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-navigation">
+                        <button class="nav-arrow" id="prevBtn" onclick="prevSlide()">←</button>
+                        <div class="slide-counter" id="slideCounter">১/১০</div>
+                        <button class="nav-arrow" id="nextBtn" onclick="nextSlide()">→</button>
+                    </div>
+                `;
+                
+                // Now initialize the gallery
+                initializeGigsGallery();
+            }
+        }
+
+        // Enhanced Job Data with 10 jobs
+        const allJobs = [
+            {
+                id: 1,
+                title: "ইউটিউব ভিডিও দেখুন",
+                description: "৫ মিনিটের একটি প্রোমো ভিডিও দেখুন এবং কমেন্ট করুন। ভিডিওটি সম্পূর্ণ দেখতে হবে।",
+                detailedInstructions: "১. প্রদত্ত লিংকে ক্লিক করুন\n২. ভিডিওটি শুরু থেকে শেষ পর্যন্ত দেখুন\n৩. কমেন্ট সেকশনে 'Great video!' লিখুন\n৪. স্ক্রিনশট নিন এবং সাবমিট করুন",
+                price: "৫/-",
+                type: "ভিডিও",
+                time: "২ ঘন্টা আগে",
+                duration: "00:05",
+                features: ["5 Minutes", "Comment", "Watch Full"]
+            },
+            {
+                id: 2,
+                title: "ফেসবুক পোস্ট লাইক করুন",
+                description: "আমাদের ফেসবুক পেজের সর্বশেষ পোস্টটি লাইক করুন এবং শেয়ার করুন।",
+                detailedInstructions: "১. ফেসবুক পেজ ভিজিট করুন\n২. লেটেস্ট পোস্টে লাইক দিন\n৩. পোস্টটি শেয়ার করুন\n৪. লাইক এবং শেয়ারের স্ক্রিনশট নিন",
+                price: "৩/-",
+                type: "সোশ্যাল",
+                time: "১ ঘন্টা আগে",
+                duration: "00:03",
+                features: ["Like", "Share", "Facebook"]
+            },
+            {
+                id: 3,
+                title: "ইনস্টাগ্রাম পোস্ট লাইক",
+                description: "ইনস্টাগ্রামে আমাদের লেটেস্ট পোস্টে লাইক দিন এবং ফলো করুন।",
+                detailedInstructions: "১. ইনস্টাগ্রাম প্রোফাইল ভিজিট করুন\n২. লেটেস্ট পোস্টে লাইক দিন\n৩. আমাদের ফলো করুন\n৪. স্ক্রিনশট নিন",
+                price: "৪/-",
+                type: "সোশ্যাল",
+                time: "৩০ মিনিট আগে",
+                duration: "00:04",
+                features: ["Like", "Follow", "Instagram"]
+            },
+            {
+                id: 4,
+                title: "টুইট রিটুইট করুন",
+                description: "আমাদের লেটেস্ট টুইটটি রিটুইট করুন এবং লাইক দিন।",
+                detailedInstructions: "১. টুইটার প্রোফাইল ভিজিট করুন\n২. লেটেস্ট টুইটে রিটুইট দিন\n৩. টুইটটি লাইক করুন\n৪. স্ক্রিনশট নিন",
+                price: "৩/-",
+                type: "সোশ্যাল",
+                time: "১৫ মিনিট আগে",
+                duration: "00:03",
+                features: ["Retweet", "Like", "Twitter"]
+            },
+            {
+                id: 5,
+                title: "অ্যাপ রিভিউ দিন",
+                description: "গুগল প্লে স্টোরে আমাদের অ্যাপটি রিভিউ করুন।",
+                detailedInstructions: "১. গুগল প্লে স্টোর ভিজিট করুন\n২. আমাদের অ্যাপটি খুঁজুন\n৩. ৫-স্টার রিভিউ দিন\n৪. স্ক্রিনশট নিন",
+                price: "১০/-",
+                type: "রিভিউ",
+                time: "১ ঘন্টা আগে",
+                duration: "00:08",
+                features: ["Review", "Play Store", "5 Stars"]
+            },
+            {
+                id: 6,
+                title: "টেলিগ্রাম গ্রুপ জয়েন",
+                description: "আমাদের টেলিগ্রাম গ্রুপে জয়েন করুন এবং একটি মেসেজ দিন।",
+                detailedInstructions: "১. টেলিগ্রাম গ্রুপ লিংকে ক্লিক করুন\n২. গ্রুপে জয়েন করুন\n৩. 'Hello' লিখে মেসেজ দিন\n৪. স্ক্রিনশট নিন",
+                price: "২/-",
+                type: "সোশ্যাল",
+                time: "১০ মিনিট আগে",
+                duration: "00:02",
+                features: ["Join", "Message", "Telegram"]
+            },
+            {
+                id: 7,
+                title: "ওয়েবসাইট ভিজিট",
+                description: "আমাদের ওয়েবসাইট ভিজিট করুন এবং ২ মিনিট থাকুন।",
+                detailedInstructions: "১. ওয়েবসাইট লিংকে ক্লিক করুন\n২. ওয়েবসাইট ব্রাউজ করুন\n৩. কমপক্ষে ২ মিনিট থাকুন\n৪. স্ক্রিনশট নিন",
+                price: "৪/-",
+                type: "ভিজিট",
+                time: "২৫ মিনিট আগে",
+                duration: "00:04",
+                features: ["Website", "2 Minutes", "Browse"]
+            },
+            {
+                id: 8,
+                title: "সার্ভে সম্পন্ন করুন",
+                description: "একটি ছোট সার্ভে ফর্ম পূরণ করুন।",
+                detailedInstructions: "১. সার্ভে লিংকে ক্লিক করুন\n২. সমস্ত প্রশ্নের উত্তর দিন\n৩. সাবমিট বাটনে ক্লিক করুন\n৪. স্ক্রিনশট নিন",
+                price: "৮/-",
+                type: "সার্ভে",
+                time: "৪৫ মিনিট আগে",
+                duration: "00:06",
+                features: ["Survey", "Form", "Complete"]
+            },
+            {
+                id: 9,
+                title: "ইমেইল সাবস্ক্রাইব",
+                description: "আমাদের নিউজলেটারে ইমেইল সাবস্ক্রাইব করুন।",
+                detailedInstructions: "১. সাবস্ক্রিপশন লিংকে ক্লিক করুন\n২. আপনার ইমেইল দিন\n৩. কনফার্মেশন ক্লিক করুন\n৪. স্ক্রিনশট নিন",
+                price: "৬/-",
+                type: "সাবস্ক্রিপশন",
+                time: "১ ঘন্টা আগে",
+                duration: "00:04",
+                features: ["Email", "Subscribe", "Newsletter"]
+            },
+            {
+                id: 10,
+                title: "প্রোডাক্ট রিভিউ",
+                description: "আমাদের প্রোডাক্টের একটি ডিটেইলড রিভিউ লিখুন।",
+                detailedInstructions: "১. প্রোডাক্ট পেজ ভিজিট করুন\n২. প্রোডাক্ট সম্পর্কে পড়ুন\n৩. ৫০+ শব্দের রিভিউ লিখুন\n৪. স্ক্রিনশট নিন",
+                price: "১২/-",
+                type: "রিভিউ",
+                time: "২ ঘন্টা আগে",
+                duration: "00:10",
+                features: ["Detailed", "Review", "50+ Words"]
+            }
+        ];
+
+        // User State Management
+        let userState = {
+            completedGigs: JSON.parse(localStorage.getItem('completedGigs')) || [],
+            notifications: JSON.parse(localStorage.getItem('notifications')) || [
+                {
+                    id: 1,
+                    message: "আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে! শুরু করুন আপনার আয়ের যাত্রা।",
+                    type: "success",
+                    timestamp: new Date().toISOString(),
+                    read: false
+                }
+            ],
+            profile: JSON.parse(localStorage.getItem('profile')) || {
+                name: "ইউজার",
+                username: "@username",
+                totalJobs: 0,
+                totalEarned: 0,
+                withdrawn: 0,
+                balance: 0,
+                totalReferrals: 3,
+                referralEarned: 150,
+                salaryHistory: generateSalaryHistory()
+            }
+        };
+
+        function generateSalaryHistory() {
+            const history = [];
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                history.push({
+                    date: date.toISOString().split('T')[0],
+                    jobs: Math.floor(Math.random() * 3),
+                    amount: Math.floor(Math.random() * 50) + 20
+                });
+            }
+            return history;
+        }
+
+        // Global Variables
+        let currentSlideIndex = 0;
+        let packageCurrentSlide = 0;
+        let timerInterval = null;
+        let currentTimer = null;
+
+        // =============================================
+        // CORE FUNCTIONALITY
+        // =============================================
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+        });
+
+        function initializeApp() {
+            initializeNavigation();
+            initializeGigsGallery();
+            loadUserProfile();
+            loadNotifications();
+            initializeWithdrawalFeed();
+            initializeSalaryChart();
+            updateNotificationBadge();
+            
+            // Start background services
+            setInterval(updateOnlineUsers, 5000);
+            setInterval(() => slidePackageTo((packageCurrentSlide + 1) % 2), 5000);
+        }
+
+        // Navigation System
+        function switchSection(sectionName) {
+            // Stop any running timers when switching away from gigs
+            if (timerInterval && sectionName !== 'gigs') {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                const timerBar = document.getElementById('activeTimerBar');
+                if (timerBar) timerBar.style.display = 'none';
+            }
+            
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Show target section
+            const targetSection = document.getElementById(sectionName + 'Section');
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Activate clicked nav item
+            const activeNav = document.querySelector(`.nav-item[onclick*="${sectionName}"]`);
+            if (activeNav) {
+                activeNav.classList.add('active');
+            }
+            
+            // Refresh section data
+            switch(sectionName) {
+                case 'gigs':
+                    initializeGigsGallery();
+                    break;
+                case 'profile':
+                    loadUserProfile();
+                    initializeSalaryChart();
+                    break;
+                case 'notifications':
+                    loadNotifications();
+                    break;
+            }
+        }
+
+        function initializeNavigation() {
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.addEventListener('click', () => slidePackageTo(index));
+            });
+        }
+
+        // Gigs Gallery System
+        function initializeGigsGallery() {
+            const jobsCount = document.getElementById('jobsCount');
+            const availableJobs = allJobs.filter(job => !userState.completedGigs.includes(job.id));
+            
+            if (jobsCount) {
+                jobsCount.textContent = `${availableJobs.length} টি কাজ`;
+            }
+            
+            renderGigsGallery(availableJobs);
+            updateNavigationButtons();
+        }
+
+        function renderGigsGallery(availableJobs) {
+            const container = document.getElementById('galleryContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            currentSlideIndex = 0;
+            
+            if (availableJobs.length === 0) {
+                container.innerHTML = `
+                    <div class="gallery-slide">
+                        <div style="text-align: center; padding: 60px 20px;">
+                            <div style="font-size: 4em; margin-bottom: 20px;">🎉</div>
+                            <h3 style="margin-bottom: 15px; color: var(--text);">আজকের জন্য এটাই!</h3>
+                            <p style="color: var(--text-light);">আগামীকাল আবার চেক করুন নতুন গিগসের জন্য</p>
+                            <button class="btn-primary" onclick="switchSection('home')" style="margin-top: 20px;">হোমে ফিরে যান</button>
+                        </div>
+                    </div>
+                `;
+                const nav = document.querySelector('.gallery-navigation');
+                if (nav) nav.style.display = 'none';
+                return;
+            }
+            
+            availableJobs.forEach((job, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'gallery-slide';
+                slide.innerHTML = `
+                    <div class="gallery-job-card">
+                        <div class="job-card-header">
+                            <span class="job-badge">${job.type}</span>
+                            <span class="job-price">${job.price}</span>
+                        </div>
+                        <h3 class="job-title">${job.title}</h3>
+                        <p class="job-description">${job.description}</p>
+                        <div class="job-features">
+                            ${job.features.map(feature => `
+                                <div class="feature">
+                                    <svg viewBox="0 0 24 24">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    ${feature}
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div style="margin-top: 25px;">
+                            <button class="btn-primary" onclick="showJobDetails(${job.id})" style="width: 100%;">এপ্লাই করুন</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(slide);
+            });
+            
+            updateGalleryPosition();
+            updateSlideCounter();
+        }
+
+        function nextSlide() {
+            const availableJobs = allJobs.filter(job => !userState.completedGigs.includes(job.id));
+            if (availableJobs.length === 0) return;
+            
+            currentSlideIndex = (currentSlideIndex + 1) % availableJobs.length;
+            updateGalleryPosition();
+            updateSlideCounter();
+            updateNavigationButtons();
+        }
+
+        function prevSlide() {
+            const availableJobs = allJobs.filter(job => !userState.completedGigs.includes(job.id));
+            if (availableJobs.length === 0) return;
+            
+            currentSlideIndex = (currentSlideIndex - 1 + availableJobs.length) % availableJobs.length;
+            updateGalleryPosition();
+            updateSlideCounter();
+            updateNavigationButtons();
+        }
+
+        function updateGalleryPosition() {
+            const container = document.getElementById('galleryContainer');
+            if (container) {
+                container.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+            }
+        }
+
+        function updateSlideCounter() {
+            const counter = document.getElementById('slideCounter');
+            const availableJobs = allJobs.filter(job => !userState.completedGigs.includes(job.id));
+            
+            if (counter && availableJobs.length > 0) {
+                counter.textContent = `${currentSlideIndex + 1}/${availableJobs.length}`;
+            }
+        }
+
+        function updateNavigationButtons() {
+            const availableJobs = allJobs.filter(job => !userState.completedGigs.includes(job.id));
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (availableJobs.length <= 1) {
+                if (prevBtn) prevBtn.style.display = 'none';
+                if (nextBtn) nextBtn.style.display = 'none';
+            } else {
+                if (prevBtn) prevBtn.style.display = 'flex';
+                if (nextBtn) nextBtn.style.display = 'flex';
+            }
+        }
+
+        // Job Details - WITH WORKING CANCEL BUTTONS
+        function showJobDetails(jobId) {
+            const job = allJobs.find(j => j.id === jobId);
+            if (!job) return;
+
+            const gigsSection = document.getElementById('gigsSection');
+            gigsSection.innerHTML = `
+                <div style="background: var(--surface); padding: 30px 25px; border-radius: 25px; box-shadow: var(--elegant-shadow); position: relative;">
+                    <button class="close-btn" onclick="cancelAndReturn()">×</button>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px;">
+                        <div>
+                            <span class="job-badge">${job.type}</span>
+                            <h2 style="margin: 15px 0 10px 0; color: var(--text);">${job.title}</h2>
+                            <div class="job-price" style="font-size: 2.2em;">${job.price}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="job-description">
+                        <h4 style="margin-bottom: 15px; color: var(--text);">কাজের বিবরণ</h4>
+                        <p>${job.description}</p>
+                    </div>
+                    
+                    <div style="background: rgba(16, 185, 129, 0.05); padding: 20px; border-radius: 15px; margin: 25px 0; border-left: 4px solid var(--primary);">
+                        <h4 style="margin-bottom: 15px; color: var(--text);">কিভাবে করবেন</h4>
+                        <p style="white-space: pre-line; line-height: 1.6;">${job.detailedInstructions}</p>
+                    </div>
+                    
+                    <div style="background: #fff3cd; padding: 20px; border-radius: 15px; margin: 25px 0; border-left: 4px solid var(--accent);">
+                        <h4 style="margin-bottom: 10px; color: #856404;">সাবমিশন গাইডলাইন</h4>
+                        <p>• কাজ শেষে স্ক্রিনশট জমা দিন</p>
+                        <p>• স্পষ্ট এবং সম্পূর্ণ স্ক্রিনশট নিন</p>
+                        <p>• সময়ের মধ্যে কাজ শেষ করুন</p>
+                    </div>
+                    
+                    <div class="cta-buttons">
+                        <button class="btn-primary" onclick="startJobTimer(${job.id})">কাজ গ্রহণ করুন</button>
+                        <button class="btn-secondary" onclick="cancelAndReturn()">পিছনে যান</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Timer System
+        function startJobTimer(jobId) {
+            const job = allJobs.find(j => j.id === jobId);
+            if (!job) return;
+
+            currentTimer = {
+                jobId: jobId,
+                startTime: Date.now(),
+                duration: job.duration
+            };
+
+            const gigsSection = document.getElementById('gigsSection');
+            gigsSection.innerHTML = `
+                <div class="timer-screen">
+                    <button class="close-btn" onclick="cancelAndReturn()">×</button>
+                    <h2>কাজ চলছে...</h2>
+                    <div class="timer" id="jobTimer">${job.duration}</div>
+                    <div class="job-details">
+                        <h3>${job.title}</h3>
+                        <p>${job.description}</p>
+                        <p><strong>পুরস্কার:</strong> ${job.price}</p>
+                        <p><strong>সময় বাকি:</strong> <span id="timeRemaining">${job.duration}</span></p>
+                    </div>
+                    <div class="cta-buttons">
+                        <button class="btn-primary" onclick="showSubmissionForm(${job.id})">কাজ সাবমিট করুন</button>
+                        <button class="btn-secondary" onclick="cancelAndReturn()" style="margin-top: 10px;">বাতিল করুন</button>
+                    </div>
+                </div>
+            `;
+
+            // Show active timer bar
+            const timerBar = document.getElementById('activeTimerBar');
+            if (timerBar) {
+                timerBar.style.display = 'block';
+                timerBar.style.animation = 'timerProgress 300s linear infinite';
+            }
+
+            startCountdown(job.duration);
+        }
+
+        function startCountdown(duration) {
+            // Clear any existing timer first
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            
+            const timerElement = document.getElementById('jobTimer');
+            const timeRemainingElement = document.getElementById('timeRemaining');
+            
+            let totalSeconds = durationToSeconds(duration);
+            
+            timerInterval = setInterval(() => {
+                totalSeconds--;
+                
+                if (totalSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    if (timerElement) timerElement.textContent = "00:00";
+                    if (timeRemainingElement) timeRemainingElement.textContent = "00:00";
+                    showTimeUpPopup();
+                    return;
+                }
+                
+                const timeString = formatTime(totalSeconds);
+                if (timerElement) timerElement.textContent = timeString;
+                if (timeRemainingElement) timeRemainingElement.textContent = timeString;
+                
+            }, 1000);
+        }
+
+        function durationToSeconds(duration) {
+            const [mins, secs] = duration.split(':').map(Number);
+            return mins * 60 + secs;
+        }
+
+        function formatTime(totalSeconds) {
+            const mins = Math.floor(totalSeconds / 60);
+            const secs = totalSeconds % 60;
+            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function showTimeUpPopup() {
+            showPopup('সময় শেষ!', 'আপনার কাজের সময় শেষ হয়েছে।');
+            setTimeout(() => {
+                cancelAndReturn();
+            }, 3000);
+        }
+
+        // Submission System
+        function showSubmissionForm(jobId) {
+            // Stop timer
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            
+            // Hide timer bar
+            const timerBar = document.getElementById('activeTimerBar');
+            if (timerBar) {
+                timerBar.style.display = 'none';
+            }
+
+            const job = allJobs.find(j => j.id === jobId);
+            const gigsSection = document.getElementById('gigsSection');
+            
+            gigsSection.innerHTML = `
+                <div class="submission-form">
+                    <button class="close-btn" onclick="cancelAndReturn()">×</button>
+                    
+                    <h2>আপনার কাজ জমা দিন</h2>
+                    <p style="margin-bottom: 20px; color: var(--text-light);">কাজ: <strong>${job.title}</strong></p>
+                    
+                    <div class="form-group">
+                        <label for="screenshot">স্ক্রিনশট আপলোড করুন *</label>
+                        <div class="upload-area" id="uploadArea">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14,2 14,8 20,8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10,9 9,9 8,9"></polyline>
+                            </svg>
+                            <p>স্ক্রিনশট আপলোড করতে ক্লিক করুন</p>
+                            <input type="file" id="screenshot" accept="image/*" style="display: none;" onchange="handleFileSelect(this)">
+                        </div>
+                        <div id="filePreview" style="margin-top: 10px;"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="workLink">কাজের লিংক (ঐচ্ছিক)</label>
+                        <input type="url" id="workLink" placeholder="https://example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="workDescription">বিস্তারিত বিবরণ *</label>
+                        <textarea id="workDescription" rows="4" placeholder="আপনার কাজ সম্পর্কে বিস্তারিত বর্ণনা দিন..."></textarea>
+                    </div>
+                    
+                    <button class="btn-primary" onclick="submitWork(${job.id})">জমা দিন</button>
+                    <button class="btn-secondary" onclick="cancelAndReturn()" style="margin-top: 10px;">বাতিল করুন</button>
+                </div>
+            `;
+
+            // Fix file upload click
+            setTimeout(() => {
+                const uploadArea = document.getElementById('uploadArea');
+                const fileInput = document.getElementById('screenshot');
+                if (uploadArea && fileInput) {
+                    uploadArea.addEventListener('click', function() {
+                        fileInput.click();
+                    });
+                }
+            }, 100);
+        }
+
+        function handleFileSelect(input) {
+            const file = input.files[0];
+            const preview = document.getElementById('filePreview');
+            
+            if (file) {
+                // File validation
+                if (!file.type.startsWith('image/')) {
+                    showPopup('ত্রুটি', 'শুধুমাত্র ইমেজ ফাইল আপলোড করুন।');
+                    input.value = '';
+                    return;
+                }
+                
+                // File size validation (5MB max)
+                if (file.size > 5 * 1024 * 1024) {
+                    showPopup('ত্রুটি', 'ফাইল সাইজ ৫MB এর কম হতে হবে।');
+                    input.value = '';
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 10px; background: rgba(16, 185, 129, 0.05); border-radius: 10px;">
+                            <img src="${e.target.result}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+                            <div>
+                                <div style="font-weight: 600;">${file.name}</div>
+                                <div style="font-size: 0.8em; color: var(--text-light);">${(file.size / 1024).toFixed(1)} KB</div>
+                            </div>
+                            <button onclick="removeFile()" style="margin-left: auto; background: none; border: none; color: var(--error); cursor: pointer;">×</button>
+                        </div>
+                    `;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeFile() {
+            document.getElementById('screenshot').value = '';
+            document.getElementById('filePreview').innerHTML = '';
+        }
+
+        // Job submission
+        function submitWork(jobId) {
+            const job = allJobs.find(j => j.id === jobId);
+            if (!job) return;
+
+            const screenshot = document.getElementById('screenshot');
+            const workDescription = document.getElementById('workDescription');
+
+            // Validation
+            if (!screenshot.files[0]) {
+                showPopup('ত্রুটি', 'দয়া করে কাজের স্ক্রিনশট আপলোড করুন।');
+                return;
+            }
+
+            if (!workDescription.value.trim()) {
+                showPopup('ত্রুটি', 'দয়া করে কাজের বিস্তারিত বিবরণ লিখুন।');
+                return;
+            }
+
+            showPopup('প্রসেসিং...', 'আপনার সাবমিশন রিভিউ করা হচ্ছে।');
+
+            // Simulate processing
+            setTimeout(() => {
+                const isApproved = Math.random() > 0.2;
+                
+                if (isApproved) {
+                    // Add to completed jobs
+                    if (!userState.completedGigs.includes(jobId)) {
+                        userState.completedGigs.push(jobId);
+                    }
+                    
+                    // Calculate earnings
+                    const amount = parseInt(job.price);
+                    userState.profile.totalJobs++;
+                    userState.profile.totalEarned += amount;
+                    userState.profile.balance += amount;
+                    
+                    // Update salary history
+                    const today = new Date().toISOString().split('T')[0];
+                    let todayEntry = userState.profile.salaryHistory.find(day => day.date === today);
+                    if (todayEntry) {
+                        todayEntry.jobs++;
+                        todayEntry.amount += amount;
+                    } else {
+                        userState.profile.salaryHistory.push({
+                            date: today,
+                            jobs: 1,
+                            amount: amount
+                        });
+                        // Keep only last 7 days
+                        if (userState.profile.salaryHistory.length > 7) {
+                            userState.profile.salaryHistory.shift();
+                        }
+                    }
+                    
+                    saveUserState();
+                    
+                    // Add notification
+                    addNotification(`আপনার কাজ অ্যাপ্রুভ হয়েছে! ${job.price} যোগ করা হয়েছে।`, 'success');
+                    
+                    showPopup('সফল!', `আপনার কাজটি অ্যাপ্রুভ হয়েছে! ${job.price} আপনার অ্যাকাউন্টে যোগ করা হয়েছে।`);
+                    
+                    // Auto-redirect to home after success
+                    setTimeout(() => {
+                        closePopup();
+                        switchSection('home');
+                    }, 2000);
+                    
+                } else {
+                    addNotification('আপনার সাবমিশনে সমস্যা রয়েছে। আবার চেষ্টা করুন।', 'error');
+                    showPopup('ত্রুটি', 'আপনার সাবমিশনে সমস্যা রয়েছে। দয়া করে আবার চেষ্টা করুন।');
+                }
+            }, 3000);
+        }
+
+        // Package Slider
+        function slidePackageTo(index) {
+            const slider = document.getElementById('sliderContainer');
+            const dots = document.querySelectorAll('.dot');
+            
+            if (slider && dots.length > 0) {
+                packageCurrentSlide = index;
+                slider.style.transform = `translateX(-${index * 100}%)`;
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+            }
+        }
+
+        // Profile System
+        function loadUserProfile() {
+            const profile = userState.profile;
+            
+            const elements = {
+                'userName': profile.name,
+                'userUsername': profile.username,
+                'totalJobs': profile.totalJobs,
+                'totalEarned': `${profile.totalEarned}/-`,
+                'withdrawn': `${profile.withdrawn}/-`,
+                'referralEarned': `${profile.referralEarned}/-`
+            };
+            
+            Object.keys(elements).forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = elements[id];
+                }
+            });
+            
+            const withdrawBtn = document.getElementById('withdrawBtn');
+            if (withdrawBtn) {
+                const canWithdraw = profile.balance >= 100;
+                withdrawBtn.disabled = !canWithdraw;
+                withdrawBtn.textContent = canWithdraw ? 
+                    `উত্তোলন করুন (${profile.balance}/-)` : 
+                    'ন্যূনতম ১০০/- প্রয়োজন';
+            }
+        }
+
+        function initializeSalaryChart() {
+            const container = document.getElementById('salaryChart');
+            if (!container) return;
+            
+            const history = userState.profile.salaryHistory;
+            const maxAmount = Math.max(...history.map(d => d.amount), 100);
+            
+            container.innerHTML = '';
+            
+            history.forEach(day => {
+                const date = new Date(day.date);
+                const dayName = date.toLocaleDateString('bn-BD', { weekday: 'short' });
+                const height = Math.max((day.amount / maxAmount) * 100, 5);
+                
+                container.innerHTML += `
+                    <div class="day-bar">
+                        <div class="bar-container">
+                            <div class="bar-fill-day" style="height: ${height}%"></div>
+                        </div>
+                        <div class="day-amount">${day.amount}/-</div>
+                        <div class="day-label">${dayName}</div>
+                    </div>
+                `;
+            });
+        }
+
+        function processWithdrawal() {
+            if (userState.profile.balance < 100) {
+                showPopup('ত্রুটি', `ন্যূনতম উত্তোলনযোগ্য Amount ১০০/-। আপনার ব্যালেন্স: ${userState.profile.balance}/-`);
+                return;
+            }
+
+            const amount = userState.profile.balance;
+            
+            showPopup('প্রসেসিং...', `আপনার উত্তোলন রিকোয়েস্ট প্রসেস করা হচ্ছে: ${amount}/-`);
+
+            setTimeout(() => {
+                userState.profile.withdrawn += amount;
+                userState.profile.balance = 0;
+                saveUserState();
+                
+                addNotification(`আপনার উত্তোলন সফল! ${amount}/- প্রসেস হয়েছে।`, 'success');
+                showPopup('সফল!', `আপনার উত্তোলন রিকোয়েস্ট সফল! ${amount}/- প্রসেস হয়েছে।`);
+                
+                loadUserProfile();
+                initializeSalaryChart();
+            }, 2000);
+        }
+
+        // Notification System
+        function loadNotifications() {
+            const container = document.getElementById('notificationsList');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            if (userState.notifications.length === 0) {
+                container.innerHTML = '<div class="notification-item">কোন নোটিফিকেশন নেই</div>';
+                return;
+            }
+            
+            userState.notifications.forEach(notif => {
+                const item = document.createElement('div');
+                item.className = `notification-item ${!notif.read ? 'unread' : ''}`;
+                item.innerHTML = `
+                    <div>${notif.message}</div>
+                    <div class="notification-time">${formatNotificationTime(notif.timestamp)}</div>
+                `;
+                
+                item.addEventListener('click', () => {
+                    notif.read = true;
+                    saveUserState();
+                    updateNotificationBadge();
+                    loadNotifications();
+                });
+                
+                container.appendChild(item);
+            });
+        }
+
+        function updateNotificationBadge() {
+            const badge = document.getElementById('notificationBadge');
+            if (!badge) return;
+            
+            const unreadCount = userState.notifications.filter(n => !n.read).length;
+            badge.textContent = unreadCount;
+            badge.style.display = unreadCount > 0 ? 'flex' : 'none';
+        }
+
+        function addNotification(message, type = 'info') {
+            const notification = {
+                id: Date.now(),
+                message: message,
+                type: type,
+                timestamp: new Date().toISOString(),
+                read: false
+            };
+            
+            userState.notifications.unshift(notification);
+            
+            // Keep only last 50 notifications
+            if (userState.notifications.length > 50) {
+                userState.notifications = userState.notifications.slice(0, 50);
+            }
+            
+            saveUserState();
+            updateNotificationBadge();
+            
+            // Refresh if on notifications page
+            if (document.getElementById('notificationsSection')?.classList.contains('active')) {
+                loadNotifications();
+            }
+        }
+
+        function formatNotificationTime(timestamp) {
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+            
+            if (diffMins < 1) return 'এখন';
+            if (diffMins < 60) return `${diffMins} মিনিট আগে`;
+            if (diffHours < 24) return `${diffHours} ঘন্টা আগে`;
+            if (diffDays < 7) return `${diffDays} দিন আগে`;
+            
+            return date.toLocaleDateString('bn-BD');
+        }
+
+        // AI Chat System
+        function openAIChat() {
+            document.body.classList.add('ai-chat-active');
+            
+            const chatHTML = `
+                <div class="ai-chat-container" id="aiChatContainer">
+                    <div class="chat-header">
+                        <button class="back-button" onclick="closeAIChat()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="19" y1="12" x2="5" y2="12"></line>
+                                <polyline points="12 19 5 12 12 5"></polyline>
+                            </svg>
+                        </button>
+                        <h3>SIMPLY AI সহায়তা</h3>
+                        <div style="width: 40px;"></div>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message ai">
+                            <strong>SIMPLY AI:</strong> হ্যালো! আমি SIMPLY AI। কিভাবে আপনাকে সাহায্য করতে পারি? আমি কাজ সম্পর্কিত যেকোন প্রশ্ন, টেকনিক্যাল ইস্যু, অ্যাকাউন্ট সমস্যা, অথবা বিজ্ঞাপন দিতে চাইলে সাহায্য করতে পারি।
+                            <div class="message-time">এখন</div>
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input" id="chatInput" placeholder="আপনার বার্তা লিখুন..." onkeypress="handleChatInput(event)">
+                        <button class="send-btn" onclick="sendChatMessage()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', chatHTML);
+            
+            setTimeout(() => {
+                const input = document.getElementById('chatInput');
+                if (input) input.focus();
+            }, 100);
+        }
+
+        function closeAIChat() {
+            const chatContainer = document.getElementById('aiChatContainer');
+            if (chatContainer) {
+                chatContainer.remove();
+            }
+            document.body.classList.remove('ai-chat-active');
+        }
+
+        function handleChatInput(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addChatMessage(message, 'user');
+            input.value = '';
+            
+            setTimeout(() => {
+                const aiResponse = generateAIResponse(message);
+                addChatMessage(aiResponse, 'ai');
+            }, 1000 + Math.random() * 1000);
+        }
+
+        function addChatMessage(text, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const time = new Date().toLocaleTimeString('bn-BD', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            
+            if (sender === 'ai') {
+                messageDiv.innerHTML = `<strong>SIMPLY AI:</strong> ${text}<div class="message-time">${time}</div>`;
+            } else {
+                messageDiv.innerHTML = `${text}<div class="message-time">${time}</div>`;
+            }
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function generateAIResponse(message) {
+            const responses = {
+                'কাজ': 'গিগস সেকশনে গিয়ে আপনার পছন্দের কাজ সিলেক্ট করুন, নির্দেশনা পড়ুন, কাজ শেষ করে সাবমিট করুন। কাজ অ্যাপ্রুভ হলে টাকা আপনার অ্যাকাউন্টে যোগ হবে।',
+                'পেমেন্ট': 'কাজ অ্যাপ্রুভ হবার ২৪ ঘন্টার মধ্যে পেমেন্ট হয়ে যায়। ন্যূনতম উত্তোলন ১০০/-। উত্তোলন ২৪-৪৮ ঘন্টার মধ্যে প্রসেস হয়।',
+                'প্রিমিয়াম': 'প্রিমিয়াম ইউজাররা ৮০% বেশি আয় করেন! প্রো: ৫৯৯/-, প্রিমিয়াম: ৯৯৯/-। প্রিমিয়াম ইউজারদের জন্য অসীম কাজ এবং অগ্রাধিকার সাপোর্ট।',
+                'রেফারেল': 'বন্ধুদের রেফার করুন, তারা কাজ করলে আপনি কমিশন পাবেন। আপনার প্রোফাইলে রেফারেল লিংক আছে।',
+                'সাপোর্ট': 'সাপোর্ট গ্রুপে জয়েন করুন: @simply_support বা এখানেই আপনার সমস্যা বলুন।',
+                'বিজ্ঞাপন': 'বিজ্ঞাপনের জন্য আমাদের অফিসিয়াল ইমেইল contact@simply.com এ যোগাযোগ করুন।',
+                'অ্যাকাউন্ট': 'অ্যাকাউন্ট সম্পর্কিত কোন সমস্যা হলে আপনার ইউজারনেম এবং সমস্যাটি বিস্তারিত বলুন।',
+                'উত্তোলন': 'উত্তোলনের জন্য প্রোফাইল সেকশনে যান, ব্যালেন্স ১০০/- বা তার বেশি হলে উত্তোলন বাটন এক্টিভ হবে।'
+            };
+            
+            for (const [keyword, response] of Object.entries(responses)) {
+                if (message.toLowerCase().includes(keyword.toLowerCase())) {
+                    return response;
+                }
+            }
+            
+            return "আপনার প্রশ্নটি খুবই গুরুত্বপূর্ণ! দয়া করে আমাদের সাপোর্ট টিমের সাথে সরাসরি যোগাযোগ করুন @simply_support অথবা contact@simply.com। আমি আরও উন্নত হতে চাই আপনার সাহায্যে।";
+        }
+
+        // Utility Functions
+        function copyReferralLink() {
+            const link = document.getElementById('referralLink');
+            if (link) {
+                navigator.clipboard.writeText(link.textContent).then(() => {
+                    showPopup('সফল!', 'রেফারেল লিংক কপি করা হয়েছে! শেয়ার করুন এবং আয় করুন।');
+                }).catch(() => {
+                    const tempInput = document.createElement('input');
+                    tempInput.value = link.textContent;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempInput);
+                    showPopup('সফল!', 'রেফারেল লিংক কপি করা হয়েছে!');
+                });
+            }
+        }
+
+        function showPopup(title, message) {
+            const popupTitle = document.getElementById('popupTitle');
+            const popupMessage = document.getElementById('popupMessage');
+            const popupOverlay = document.getElementById('popupOverlay');
+            
+            if (popupTitle) popupTitle.textContent = title;
+            if (popupMessage) popupMessage.textContent = message;
+            if (popupOverlay) popupOverlay.style.display = 'flex';
+        }
+
+        function closePopup() {
+            const popupOverlay = document.getElementById('popupOverlay');
+            if (popupOverlay) popupOverlay.style.display = 'none';
+        }
+
+        // TEMPORARY: Save to localStorage (will replace with Telegram)
+        function saveUserState() {
+            try {
+                localStorage.setItem('completedGigs', JSON.stringify(userState.completedGigs));
+                localStorage.setItem('notifications', JSON.stringify(userState.notifications));
+                localStorage.setItem('profile', JSON.stringify(userState.profile));
+            } catch (e) {
+                console.log('Storage error:', e);
+            }
+        }
+
+        function updateOnlineUsers() {
+            const element = document.getElementById('onlineUsers');
+            if (element) {
+                const onlineUsers = Math.floor(Math.random() * (250 - 80 + 1)) + 80;
+                element.textContent = onlineUsers;
+            }
+        }
+
+        function initializeWithdrawalFeed() {
+            const container = document.getElementById('withdrawalScroll');
+            if (!container) return;
+            
+            const names = ["Alex***", "Sam***", "Jam***", "Rob***", "Mic***"];
+            let html = '';
+            
+            for (let i = 0; i < 8; i++) {
+                const name = names[Math.floor(Math.random() * names.length)];
+                const amount = Math.floor(Math.random() * (700 - 80 + 1)) + 80;
+                html += `
+                    <div class="withdrawal-item">
+                        <span class="withdrawal-name">${name} withdrawn</span>
+                        <span class="withdrawal-amount">${amount}/- টাকা</span>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = html;
+        }
+
+        // Initialize the app
+        window.addEventListener('load', function() {
+            initializeApp();
+        });
+    </script>
+</body>
+</html>
