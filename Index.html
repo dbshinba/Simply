@@ -1715,119 +1715,39 @@
             }
         }
 
-        // Enhanced Job Data with 10 jobs
-        const allJobs = [
-            {
-                id: 1,
-                title: "ইউটিউব ভিডিও দেখুন",
-                description: "৫ মিনিটের একটি প্রোমো ভিডিও দেখুন এবং কমেন্ট করুন। ভিডিওটি সম্পূর্ণ দেখতে হবে।",
-                detailedInstructions: "১. প্রদত্ত লিংকে ক্লিক করুন\n২. ভিডিওটি শুরু থেকে শেষ পর্যন্ত দেখুন\n৩. কমেন্ট সেকশনে 'Great video!' লিখুন\n৪. স্ক্রিনশট নিন এবং সাবমিট করুন",
-                price: "৫/-",
-                type: "ভিডিও",
-                time: "২ ঘন্টা আগে",
-                duration: "00:05",
-                features: ["5 Minutes", "Comment", "Watch Full"]
-            },
-            {
-                id: 2,
-                title: "ফেসবুক পোস্ট লাইক করুন",
-                description: "আমাদের ফেসবুক পেজের সর্বশেষ পোস্টটি লাইক করুন এবং শেয়ার করুন।",
-                detailedInstructions: "১. ফেসবুক পেজ ভিজিট করুন\n২. লেটেস্ট পোস্টে লাইক দিন\n৩. পোস্টটি শেয়ার করুন\n৪. লাইক এবং শেয়ারের স্ক্রিনশট নিন",
-                price: "৩/-",
-                type: "সোশ্যাল",
-                time: "১ ঘন্টা আগে",
-                duration: "00:03",
-                features: ["Like", "Share", "Facebook"]
-            },
-            {
-                id: 3,
-                title: "ইনস্টাগ্রাম পোস্ট লাইক",
-                description: "ইনস্টাগ্রামে আমাদের লেটেস্ট পোস্টে লাইক দিন এবং ফলো করুন।",
-                detailedInstructions: "১. ইনস্টাগ্রাম প্রোফাইল ভিজিট করুন\n২. লেটেস্ট পোস্টে লাইক দিন\n৩. আমাদের ফলো করুন\n৪. স্ক্রিনশট নিন",
-                price: "৪/-",
-                type: "সোশ্যাল",
-                time: "৩০ মিনিট আগে",
-                duration: "00:04",
-                features: ["Like", "Follow", "Instagram"]
-            },
-            {
-                id: 4,
-                title: "টুইট রিটুইট করুন",
-                description: "আমাদের লেটেস্ট টুইটটি রিটুইট করুন এবং লাইক দিন।",
-                detailedInstructions: "১. টুইটার প্রোফাইল ভিজিট করুন\n২. লেটেস্ট টুইটে রিটুইট দিন\n৩. টুইটটি লাইক করুন\n৪. স্ক্রিনশট নিন",
-                price: "৩/-",
-                type: "সোশ্যাল",
-                time: "১৫ মিনিট আগে",
-                duration: "00:03",
-                features: ["Retweet", "Like", "Twitter"]
-            },
-            {
-                id: 5,
-                title: "অ্যাপ রিভিউ দিন",
-                description: "গুগল প্লে স্টোরে আমাদের অ্যাপটি রিভিউ করুন।",
-                detailedInstructions: "১. গুগল প্লে স্টোর ভিজিট করুন\n২. আমাদের অ্যাপটি খুঁজুন\n৩. ৫-স্টার রিভিউ দিন\n৪. স্ক্রিনশট নিন",
-                price: "১০/-",
-                type: "রিভিউ",
-                time: "১ ঘন্টা আগে",
-                duration: "00:08",
-                features: ["Review", "Play Store", "5 Stars"]
-            },
-            {
-                id: 6,
-                title: "টেলিগ্রাম গ্রুপ জয়েন",
-                description: "আমাদের টেলিগ্রাম গ্রুপে জয়েন করুন এবং একটি মেসেজ দিন।",
-                detailedInstructions: "১. টেলিগ্রাম গ্রুপ লিংকে ক্লিক করুন\n২. গ্রুপে জয়েন করুন\n৩. 'Hello' লিখে মেসেজ দিন\n৪. স্ক্রিনশট নিন",
-                price: "২/-",
-                type: "সোশ্যাল",
-                time: "১০ মিনিট আগে",
-                duration: "00:02",
-                features: ["Join", "Message", "Telegram"]
-            },
-            {
-                id: 7,
-                title: "ওয়েবসাইট ভিজিট",
-                description: "আমাদের ওয়েবসাইট ভিজিট করুন এবং ২ মিনিট থাকুন।",
-                detailedInstructions: "১. ওয়েবসাইট লিংকে ক্লিক করুন\n২. ওয়েবসাইট ব্রাউজ করুন\n৩. কমপক্ষে ২ মিনিট থাকুন\n৪. স্ক্রিনশট নিন",
-                price: "৪/-",
-                type: "ভিজিট",
-                time: "২৫ মিনিট আগে",
-                duration: "00:04",
-                features: ["Website", "2 Minutes", "Browse"]
-            },
-            {
-                id: 8,
-                title: "সার্ভে সম্পন্ন করুন",
-                description: "একটি ছোট সার্ভে ফর্ম পূরণ করুন।",
-                detailedInstructions: "১. সার্ভে লিংকে ক্লিক করুন\n২. সমস্ত প্রশ্নের উত্তর দিন\n৩. সাবমিট বাটনে ক্লিক করুন\n৪. স্ক্রিনশট নিন",
-                price: "৮/-",
-                type: "সার্ভে",
-                time: "৪৫ মিনিট আগে",
-                duration: "00:06",
-                features: ["Survey", "Form", "Complete"]
-            },
-            {
-                id: 9,
-                title: "ইমেইল সাবস্ক্রাইব",
-                description: "আমাদের নিউজলেটারে ইমেইল সাবস্ক্রাইব করুন।",
-                detailedInstructions: "১. সাবস্ক্রিপশন লিংকে ক্লিক করুন\n২. আপনার ইমেইল দিন\n৩. কনফার্মেশন ক্লিক করুন\n৪. স্ক্রিনশট নিন",
-                price: "৬/-",
-                type: "সাবস্ক্রিপশন",
-                time: "১ ঘন্টা আগে",
-                duration: "00:04",
-                features: ["Email", "Subscribe", "Newsletter"]
-            },
-            {
-                id: 10,
-                title: "প্রোডাক্ট রিভিউ",
-                description: "আমাদের প্রোডাক্টের একটি ডিটেইলড রিভিউ লিখুন।",
-                detailedInstructions: "১. প্রোডাক্ট পেজ ভিজিট করুন\n২. প্রোডাক্ট সম্পর্কে পড়ুন\n৩. ৫০+ শব্দের রিভিউ লিখুন\n৪. স্ক্রিনশট নিন",
-                price: "১২/-",
-                type: "রিভিউ",
-                time: "২ ঘন্টা আগে",
-                duration: "00:10",
-                features: ["Detailed", "Review", "50+ Words"]
-            }
-        ];
+// ===== REAL BACKEND CONNECTION =====
+const API_BASE = '/.netlify/functions';
+
+// Real jobs from backend
+let allJobs = [];
+
+// Load real jobs from backend
+async function loadRealJobs() {
+  try {
+    const response = await fetch(`${API_BASE}/jobs`);
+    const data = await response.json();
+    allJobs = data.jobs || getFallbackJobs();
+  } catch (error) {
+    allJobs = getFallbackJobs();
+  }
+}
+
+// Fallback jobs if backend fails
+function getFallbackJobs() {
+  return [
+    {
+      id: 1,
+      title: "ইউটিউব ভিডিও দেখুন",
+      description: "৫ মিনিটের একটি প্রোমো ভিডিও দেখুন এবং কমেন্ট করুন। ভিডিওটি সম্পূর্ণ দেখতে হবে।",
+      detailedInstructions: "১. প্রদত্ত লিংকে ক্লিক করুন\n২. ভিডিওটি শুরু থেকে শেষ পর্যন্ত দেখুন\n৩. কমেন্ট সেকশনে 'Great video!' লিখুন\n৪. স্ক্রিনশট নিন এবং সাবমিট করুন",
+      price: "৫/-",
+      type: "ভিডিও",
+      time: "২ ঘন্টা আগে",
+      duration: "05:00".
+      features: ["5 Minutes", "Comment", "Watch Full"]
+    }
+  ];
+}
 
         // User State Management
         let userState = {
@@ -1950,18 +1870,18 @@
             });
         }
 
-        // Gigs Gallery System
-        function initializeGigsGallery() {
-            const jobsCount = document.getElementById('jobsCount');
-            const availableJobs = allJobs.filter(job => !userState.completedGigs.includes(job.id));
-            
-            if (jobsCount) {
-                jobsCount.textContent = `${availableJobs.length} টি কাজ`;
-            }
-            
-            renderGigsGallery(availableJobs);
-            updateNavigationButtons();
-        }
+      async function initializeGigsGallery() {
+    await loadRealJobs();
+    const availableJobs = allJobs.filter(job => !userState.completedGigs.includes(job.id));
+    const jobsCount = document.getElementById('jobsCount');
+    
+    if (jobsCount) {
+        jobsCount.textContent = `${availableJobs.length} টি কাজ`;
+    }
+    
+    renderGigsGallery(availableJobs);
+    updateNavigationButtons();
+}
 
         function renderGigsGallery(availableJobs) {
             const container = document.getElementById('galleryContainer');
